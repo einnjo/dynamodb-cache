@@ -1,0 +1,26 @@
+{
+  "name": "dynamodb-cache",
+  "version": "0.0.0",
+  "description": "A simple cache build around DynamoDB",
+  "repository": "https://github.com/einnjo/dynamodb-cache",
+  "license": "MIT",
+  "author": "einnjo",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "yarn clean",
+    "build": "tsc",
+    "clean": "rm -rf ./build",
+    "dev": "tsc-watch",
+    "format": "prettier --write \"src/**/*.ts\" --write \"package.json\"",
+    "format:check": "prettier --check \"src/**/*.ts\" --check \"package.json\""
+  },
+  "dependencies": {
+    "aws-sdk": "^2.556.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2",
+    "prettier-plugin-packagejson": "^2.0.1",
+    "tsc-watch": "^4.0.0",
+    "typescript": "^3.6.4"
+  }
+}
