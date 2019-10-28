@@ -12,7 +12,8 @@
     "clean": "rm -rf ./build",
     "dev": "tsc-watch",
     "format": "prettier --write \"src/**/*.ts\" --write \"package.json\"",
-    "format:check": "prettier --check \"src/**/*.ts\" --check \"package.json\""
+    "format:check": "prettier --check \"src/**/*.ts\" --check \"package.json\"",
+    "docs:generate": "typedoc"
   },
   "dependencies": {
     "aws-sdk": "^2.556.0"
@@ -21,6 +22,8 @@
     "prettier": "^1.18.2",
     "prettier-plugin-packagejson": "^2.0.1",
     "tsc-watch": "^4.0.0",
+    "typedoc": "^0.15.0",
+    "typedoc-plugin-markdown": "^2.2.11",
     "typescript": "^3.6.4"
   }
 }

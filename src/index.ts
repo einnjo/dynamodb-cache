@@ -4,6 +4,9 @@ import { PutItemInputAttributeMap } from "aws-sdk/clients/dynamodb";
 import { now } from "./utils";
 import { serializer, deserializer } from "./serde";
 
+/**
+ * A simple cache build around DynamoDB.
+ */
 export class DynamoCache<T> {
   public tableName: string;
   private dynamo: DynamoDB;
@@ -12,6 +15,15 @@ export class DynamoCache<T> {
   private serializer: (value: T) => string;
   private deserializer: (value: string) => T;
 
+  /**
+   * Returns a new DynamoCache instance.
+   * @param options
+   * @param options.tableName The name of your existing DynamoDB table.
+   * @param options.ttlAttribute The attribute where ttl is stored, should be of type Number and store the unix timestamp in seconds.
+   * @param options.ttlSeconds When a new item is inserted, it'll expired after this number of seconds defaults to 300 seconds (5 minutes).
+   * @param options.serializer A serializer function that converts your input type to string for storage.
+   * @param options.deserializer A deserializer function that converts your input type from string to your input type for retrieval.
+   */
   constructor(options: {
     tableName: string;
     ttlAttribute?: string;
@@ -28,6 +40,15 @@ export class DynamoCache<T> {
     this.deserializer = options.deserializer || deserializer;
   }
 
+  /**
+   * Retrieves a the value of a cached key.
+   * You can provide a default value to return in case the key is missing,
+   * it defaults to undefined.
+   * **Note:** Even if the key exists, it might still not be returned if the ttlAttribute constructor
+   * option was set and the item is expired.
+   * @param key
+   * @param defaultValue - A value to use as the return value in case the key is missing, defaults to undefined.
+   */
   async get(key: string, defaultValue: any = undefined) {
     const response = await this.dynamo
       .getItem({
@@ -44,6 +65,13 @@ export class DynamoCache<T> {
     return this.deserializer(value);
   }
 
+  /**
+   * Stores a value under key in the cache.
+   * If the ttlAttribute option was set in the constructor,
+   * A delta of now + ttlSeconds will be stored in the ttl column.
+   * @param key
+   * @param value
+   */
   async set(key: string, value: T) {
     const item: PutItemInputAttributeMap = {
       key: { S: key },
@@ -61,6 +89,10 @@ export class DynamoCache<T> {
       .promise();
   }
 
+  /**
+   * Deletes a key from the cache.
+   * @param key
+   */
   async del(key: string) {
     await this.dynamo
       .deleteItem({
