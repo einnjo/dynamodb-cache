@@ -11,16 +11,20 @@
     "build": "tsc",
     "clean": "rm -rf ./build",
     "dev": "tsc-watch",
+    "docs:generate": "typedoc",
     "format": "prettier --write \"src/**/*.ts\" --write \"package.json\"",
     "format:check": "prettier --check \"src/**/*.ts\" --check \"package.json\"",
-    "docs:generate": "typedoc"
+    "test": "jest"
   },
   "dependencies": {
     "aws-sdk": "^2.556.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.20",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "prettier-plugin-packagejson": "^2.0.1",
+    "ts-jest": "^24.1.0",
     "tsc-watch": "^4.0.0",
     "typedoc": "^0.15.0",
     "typedoc-plugin-markdown": "^2.2.11",
