@@ -1,16 +1,14 @@
 {
+  "exclude": ["src/**/*.test.ts"],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "build",
-    "target": "es2018",
+    "target": "es5",
     "module": "commonjs",
-    "sourceMap": true,
-    "declaration": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": false,
-    "importHelpers": false,
+    "lib": ["es2017", "es7", "es6", "dom"],
+    "declaration": true,
+    "skipLibCheck": true,
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -19,9 +17,6 @@
     "noUnusedParameters": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strictNullChecks": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true
+    "strictNullChecks": true
   }
 }
