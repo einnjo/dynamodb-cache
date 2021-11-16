@@ -22,7 +22,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "aws-sdk": "^2.556.0"
+    "aws-sdk": "^2.814.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.20",
